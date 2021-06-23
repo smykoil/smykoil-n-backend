@@ -33,7 +33,7 @@ return [
 
     // default category
     'default_category' => [
-        'title' => 'default' ,
+        'title' => 'Без категории' ,
         'slug' => 'default'
     ]
 
