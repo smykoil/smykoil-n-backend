@@ -16,13 +16,9 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
-
             $table->string('file_src');
-            $table->text('excerpt');
             $table->longText('description');
 
-            $table->boolean('is_published');
             $table->timestamps();
         });
     }

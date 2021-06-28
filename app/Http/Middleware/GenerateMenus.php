@@ -17,7 +17,7 @@ class GenerateMenus
      */
     public function handle(Request $request, Closure $next)
     {
-        Menu::make('mainNav', function ($menu) {
+        Menu::make('main', function ($menu) {
             $menu->add('Главная');
             $menu->add('Игротека', 'categories/igroteka');
             $menu->add('Полезные статьи', 'categories/poleznye-stati');

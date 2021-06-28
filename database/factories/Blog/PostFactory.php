@@ -1,18 +1,19 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Blog;
 
-use App\Models\Document;
+use App\Models\Blog\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class DocumentFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Document::class;
+    protected $model = Post::class;
 
     /**
      * Define the model's default state.
@@ -21,8 +22,9 @@ class DocumentFactory extends Factory
      */
     public function definition()
     {
+        $content = $this->faker->realText(rand(1000, 2000));
         return [
-            //
+            'content' => $content,
         ];
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Blog;
 
-use App\Models\Exhibition;
+use App\Models\Blog\Exhibition;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ExhibitionFactory extends Factory
 {
@@ -19,10 +20,11 @@ class ExhibitionFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
+        $description = $this->faker->realText(rand(1000, 2000));
         return [
-            //
+            'description' => $description,
         ];
     }
 }

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Laravelcity\Categories\Facade\Category;
 use Laravelcity\Categories\Lib\CategoryException;
 
 class CategoryController extends Controller
@@ -16,13 +16,13 @@ class CategoryController extends Controller
     protected $category;
 
     public function __construct() {
-        $this->category = Category::newCollection('Post');
+        $this->category = (new Category())->query();
     }
 
     public function indexAction(): JsonResponse
     {
-        $categories = $this->category->rootCategories()->toArray();
-        return $this->response($categories);
+        $categories = $this->category->get();
+        return $this->response($categories->toArray());
     }
 
     public function storeAction(Request $request): JsonResponse
@@ -41,13 +41,13 @@ class CategoryController extends Controller
 
     public function showAction(int $id): JsonResponse
     {
-        $category = $this->category->find($id);
+        $category = Category::query()->find($id);
 
         if(!$category){
-            $this->abort(404, 'Category not found');
+            return $this->abort(404, 'Category not found');
         }
 
-        return $this->response($category->posts());
+        return $this->response($category->toArray());
     }
 
     public function updateAction(Request $request, int $category_id): JsonResponse

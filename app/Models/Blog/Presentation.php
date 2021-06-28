@@ -2,14 +2,14 @@
 
 namespace App\Models\Blog;
 
-use App\Traits\CategorieableTrait;
+use App\Traits\CategorizableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Presentation extends Model
 {
     use HasFactory;
-    use CategorieableTrait;
+    use CategorizableTrait;
 
-    protected $guarded = ['is_published'];
+    protected $guarded = [];
 }
