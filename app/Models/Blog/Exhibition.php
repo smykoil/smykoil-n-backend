@@ -2,14 +2,21 @@
 
 namespace App\Models\Blog;
 
-use App\Traits\CategorizableTrait;
+use App\Traits\PostTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Exhibition extends Model
+class Exhibition extends Model implements HasMedia
 {
     use HasFactory;
-    use CategorizableTrait;
+    use InteractsWithMedia;
 
     protected $guarded = [];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('files');
+    }
 }

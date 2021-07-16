@@ -12,7 +12,8 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravelcity/laravel-categories": "^1.0",
-        "lavary/laravel-menu": "^1.8"
+        "lavary/laravel-menu": "^1.8",
+        "spatie/laravel-medialibrary": "^9.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

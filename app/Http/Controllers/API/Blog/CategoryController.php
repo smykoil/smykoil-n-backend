@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Blog\CategoryResource;
 use App\Models\Blog\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,10 +28,10 @@ class CategoryController extends Controller
 
     public function storeAction(Request $request): JsonResponse
     {
-        $request->validate(['title'=>'required','parent'=>'required']);
+        $data = $request->validate(['title'=>'required','parent'=>'required']);
 
         try {
-            $this->category->insert($request);
+            $this->category->insert($data);
         } catch (CategoryException $e){
             Log::error($e);
             return $this->abort(500, 'Category can\'t be created');
@@ -41,19 +42,32 @@ class CategoryController extends Controller
 
     public function showAction(int $id): JsonResponse
     {
-        $category = Category::query()->find($id);
+        $category = Category::query()->select('id', 'title', 'created_at')
+            ->find($id);
 
         if(!$category){
             return $this->abort(404, 'Category not found');
         }
 
-        return $this->response($category->toArray());
+        $category = CategoryResource::make($category)->jsonSerialize();
+
+        return $this->response($category);
     }
 
     public function updateAction(Request $request, int $category_id): JsonResponse
     {
+        $category = $this->category->find($category_id);
+
+        if(!$category) {
+            return $this->abort(404, 'Category not found');
+        }
+
         try {
-            $this->category->update($request,$category_id);
+            $category->update([
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
+            ]);
         } catch (CategoryException $e){
             Log::error($e);
             return $this->abort(500, 'Category can\'t be updated');

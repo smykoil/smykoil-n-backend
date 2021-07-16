@@ -1,28 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories\Blog;
 
 use App\Models\Blog\Document;
-use App\Models\Blog\Exhibition;
-use App\Models\Blog\Post;
-use App\Models\Blog\Presentation;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
 class DocumentFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Document::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+    #[ArrayShape(['file_src' => "string", 'description' => "string"])]
     public function definition(): array
     {
         $file = rand(1,2) == 2 ? 'fp.docx' : 'kt.docx';

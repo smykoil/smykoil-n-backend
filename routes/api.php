@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\Blog\CategorizableController;
+use App\Http\Controllers\API\Blog\ArticleController;
 use App\Http\Controllers\API\Blog\CategoryController;
 use App\Http\Controllers\API\MenuController;
 use Illuminate\Http\Request;
@@ -31,10 +31,10 @@ Route::prefix('categories')->group(function () {
     Route::delete('/{id}', [CategoryController::class, 'destroyAction']);
 });
 
-Route::prefix('categorizables')->group(function () {
-    Route::get('/', [CategorizableController::class, 'indexAction']);
-    Route::post('/', [CategorizableController::class, 'storeAction']);
-    Route::get('/{id}', [CategorizableController::class, 'showAction']);
-    Route::put('/{id}', [CategorizableController::class, 'updateAction']);
-    Route::delete('/{id}', [CategorizableController::class, 'destroyAction']);
+Route::prefix('articles')->group(function () {
+    Route::get('/', [ArticleController::class, 'indexAction']);
+    Route::post('/', [ArticleController::class, 'storeAction']);
+    Route::get('/{id}', [ArticleController::class, 'showAction']);
+    Route::put('/{id}', [ArticleController::class, 'updateAction']);
+    Route::delete('/{id}', [ArticleController::class, 'destroyAction']);
 });
