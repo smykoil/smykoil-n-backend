@@ -23,6 +23,7 @@ class ExhibitionResource extends JsonResource
         foreach ($files as $file) {
             $file_urls[] = [
                 'url' => $file->getUrl(),
+                'thumb_url' => $file->getUrl('thumb'),
                 'title' => $file->title,
                 'description' => $file->description
             ];

@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
-        Category::factory()->count(40)->create();
-        Document::factory()->count(40)->create();
-        Exhibition::factory()->count(40)->create();
-        Post::factory()->count(40)->create();
-        Presentation::factory()->count(40)->create();
+        Category::factory()->count(5)->create();
+        Document::factory()->count(5)->create();
+        Exhibition::factory()->count(5)->create();
+        Post::factory()->count(5)->create();
+        Presentation::factory()->count(5)->create();
 
         Article::factory()->count(160)->create();
 
@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
         $exhibitions = Exhibition::all();
         foreach ($exhibitions as $exhibition) {
-            for ($i = 0; $i < 20; $i++) {
+            for ($i = 0; $i < 15; $i++) {
                 try {
                     $exhibition->addMedia($this->makeTemporaryImage())
                         ->toMediaCollection('files');
