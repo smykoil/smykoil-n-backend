@@ -14,12 +14,13 @@ class ArticleCollection extends Resource
      * @param  Request  $request
      * @return array
      */
-    #[ArrayShape(['articles' => "\Illuminate\Support\Collection", 'pagination' => "array"])]
+    #[ArrayShape(['list' => "\Illuminate\Support\Collection", 'pagination' => "array"])]
     public function toArray($request): array
     {
-        return [
-            'articles' => ArticleResource::collection($this->collection),
-            'pagination' => $this->pagination()
-        ];
+        $collection = ['list' => ArticleResource::collection($this->collection)];
+        try {
+            $collection['pagination'] = $this->pagination();
+        } catch (\Exception $e) {}
+        return $collection; 
     }
 }

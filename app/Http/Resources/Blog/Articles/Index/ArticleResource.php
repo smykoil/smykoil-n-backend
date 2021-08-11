@@ -16,10 +16,15 @@ class ArticleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'preview' => $this->getMedia('preview')->first()->getUrl(),
+            'category' => [
+                'id' => $this->category->id,
+                'title' => $this->category->title
+            ],
+            'preview' => $this->getMedia('preview')->first()->getUrl('thumb'),
             'title' => $this->title,
             'excerpt' => $this->excerpt,
             'created_at' => $this->created_at,
+            'type' => $this->post_type
         ];
     }
 }

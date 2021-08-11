@@ -24,6 +24,9 @@ class CreateArticlesTable extends Migration
             $table->nullableMorphs('post');
 
             $table->boolean('is_published');
+            $table->unsignedBigInteger('views_count')
+                ->default(0)
+                ->index();
 
             $table->timestamps();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Blog\Articles\Show;
 
+use App\Http\Resources\Blog\ApplicationResource;
 use App\Http\Resources\Blog\DocumentResource;
 use App\Http\Resources\Blog\ExhibitionResource;
 use App\Http\Resources\Blog\PostResource;
@@ -27,6 +28,7 @@ class ArticleResource extends JsonResource
         'preview' => "mixed",
         'title' => "mixed",
         'post' => "array",
+        'applications' => "array",
         'created_at' => "mixed"
     ])] public function toArray($request): array
     {
@@ -38,9 +40,10 @@ class ArticleResource extends JsonResource
         };
         return [
             'id' => $this->id,
-            'preview' => $this->getMedia('preview')->first()->getUrl(),
+            'preview' => $this->getMedia('preview')->first()->getUrl('thumb'),
             'title' => $this->title,
             'post' => $post->jsonSerialize(),
+            'applications' => ApplicationResource::collection($this->applications),
             'created_at' => $this->created_at,
         ];
     }

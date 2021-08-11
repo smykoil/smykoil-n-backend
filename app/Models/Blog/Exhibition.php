@@ -27,8 +27,7 @@ class Exhibition extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(250)
-            ->height(140)
+            ->width(512)
             ->performOnCollections('files');
     }
 }

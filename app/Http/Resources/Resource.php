@@ -15,12 +15,17 @@ class Resource extends ResourceCollection
         'total_pages' => "mixed"
     ])]
     public function pagination() {
-        return [
-            'total' => $this->total(),
-            'count' => $this->count(),
-            'per_page' => $this->perPage(),
-            'current_page' => $this->currentPage(),
-            'total_pages' => $this->lastPage()
-        ];
+        try {
+			$pagination = [
+				'total' => $this->total() ?? 0,
+				'count' => $this->count() ?? 0,
+				'per_page' => $this->perPage() ?? 0,
+				'current_page' => $this->currentPage() ?? 0,
+				'total_pages' => $this->lastPage() ?? 0
+			];
+		} catch (Exception $e) {
+			throw $e;
+		}
+		return $pagination;
     }
 }

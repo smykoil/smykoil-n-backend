@@ -43,10 +43,10 @@ class ArticleFactory extends Factory
                 4 => rand(1,Presentation::query()->count()),
             },
             'post_type' => match ($type) {
-                1 => Document::class,
-                2 => Exhibition::class,
-                3 => Post::class,
-                4 => Presentation::class,
+                1 => 'document',
+                2 => 'exhibition',
+                3 => 'post',
+                4 => 'presentation',
             },
         ];
     }
