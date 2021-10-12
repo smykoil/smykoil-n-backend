@@ -13,13 +13,20 @@ class Comment extends Model
 
     protected $guarded = [];
 
+    /** Recursive hasMany children */
     public function children(): HasMany
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id')
+            ->with('children');
     }
 
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Comment::class, 'parent_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

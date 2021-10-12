@@ -23,7 +23,7 @@ class ArticleController extends Controller
 
     public function indexAction(ArticleIndexRequest $request): JsonResponse
     {
-        dd($request->input('per_page'));
+        //dd($request->input('per_page'));
         $articles = $this->articleRepository->paginateList(...$request->all());
 
         $articles = ArticleCollection::make($articles);

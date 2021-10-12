@@ -20,11 +20,11 @@ class ArticleRepository
     }
 
     public function paginateList(
-        int $category_id = null,
-        int $is_published = 1,
-        string $sort_by = 'created_at',
-        string $sort_direction = 'desc',
-        int $per_page = 12,
+        $category_id = null,
+        $is_published = 1,
+        $sort_by = 'created_at',
+        $sort_direction = 'desc',
+        $per_page = 12,
     ): LengthAwarePaginator
     {
         if ($category_id) {

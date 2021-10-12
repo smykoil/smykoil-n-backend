@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
         $articles = Article::all();
         foreach ($articles as $article){
             Comment::factory(['commentable_id' => $article->id])
+                ->count(3)
                 ->hasChildren(3, ['commentable_id' => $article->id])
                 ->create();
             try {
