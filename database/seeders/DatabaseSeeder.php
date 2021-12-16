@@ -12,6 +12,7 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -31,7 +32,20 @@ class DatabaseSeeder extends Seeder
         $fm = new Filesystem;
         $fm->cleanDirectory('storage/app/media');
 
+        User::factory()->create([
+            'email' => 'smykoil@ya.ru',
+            'password' => Hash::make('solumo88')
+        ]);
         User::factory(10)->create();
+        $users = User::all();
+        foreach ($users as $user) {
+            try {
+                $user->addMedia($this->makeTemporaryImage(256, 256))
+                    ->toMediaCollection('avatar');
+            } catch (FileDoesNotExist | FileIsTooBig $e) {
+                Log::error($e);
+            }
+        }
 
         Category::factory()->count(5)->create();
         Document::factory()->count(5)->create();

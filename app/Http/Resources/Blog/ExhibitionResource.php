@@ -22,6 +22,7 @@ class ExhibitionResource extends JsonResource
         $file_urls = [];
         foreach ($files as $file) {
             $file_urls[] = [
+                'id' => $file->id,
                 'url' => $file->getUrl(),
                 'thumb_url' => $file->getUrl('thumb'),
                 'title' => $file->title,

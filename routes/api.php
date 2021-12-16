@@ -18,8 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    $user = $request->user();
+
+    $user->avatar_thumb = $user->getMedia('avatar')->first()->getUrl('thumb');
+    $user->avatar       = $user->getMedia('avatar')->first()->getUrl();
+
+    return response()->json(['user' => $user]);
 });
 
 Route::get('/menus/{name}', [MenuController::class, 'indexAction']);

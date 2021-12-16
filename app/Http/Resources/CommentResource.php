@@ -22,6 +22,7 @@ class CommentResource extends JsonResource
                 'first_name' => $this->user->first_name,
                 'last_name' => $this->user->last_name,
                 'middle_name' => $this->user->middle_name,
+                'avatar_thumb' => $this->user->getMedia('avatar')->first()->getUrl('thumb'),
             ],
             'body' => $this->body,
             'created_at' => $this->created_at,
